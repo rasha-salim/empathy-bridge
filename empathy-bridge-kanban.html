@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empathy Bridge - Development Kanban Board</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EF4444 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .stats-bar {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: #333;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3B82F6;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            height: 8px;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            margin-top: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .kanban-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px;
+            min-height: 70vh;
+        }
+
+        .column {
+            min-width: 320px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .column-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .column-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .column-count {
+            background: #6366f1;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #6366f1;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: grab;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .card:active {
+            cursor: grabbing;
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .card-priority {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .priority-high {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .priority-medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .priority-low {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .card-phase {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .card-assignee {
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .column.planning { border-top: 4px solid #8B5CF6; }
+        .column.todo { border-top: 4px solid #3B82F6; }
+        .column.in-progress { border-top: 4px solid #F59E0B; }
+        .column.testing { border-top: 4px solid #06B6D4; }
+        .column.done { border-top: 4px solid #10B981; }
+
+        .planning .column-count { background: #8B5CF6; }
+        .todo .column-count { background: #3B82F6; }
+        .in-progress .column-count { background: #F59E0B; }
+        .testing .column-count { background: #06B6D4; }
+        .done .column-count { background: #10B981; }
+
+        .planning .card { border-left-color: #8B5CF6; }
+        .todo .card { border-left-color: #3B82F6; }
+        .in-progress .card { border-left-color: #F59E0B; }
+        .testing .card { border-left-color: #06B6D4; }
+        .done .card { border-left-color: #10B981; }
+
+        .add-card-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px dashed #3B82F6;
+            border-radius: 8px;
+            color: #3B82F6;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .add-card-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #2563eb;
+        }
+
+        .drag-over {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px dashed #3B82F6;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        @media (max-width: 768px) {
+            .kanban-container {
+                flex-direction: column;
+            }
+            
+            .column {
+                min-width: unset;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .phase-legend {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>❤️ Empathy Bridge Development</h1>
+        <p>Building Understanding Through Gaza Stories - Development Kanban Board</p>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number" id="totalTasks">0</div>
+            <div class="stat-label">Total Tasks</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="completedTasks">0</div>
+            <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="activeTasks">0</div>
+            <div class="stat-label">In Progress</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="timeRemaining">3 Days</div>
+            <div class="stat-label">Target Timeline</div>
+        </div>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 15%"></div>
+        <div class="progress-text">MVP Development Progress: 15% Complete (Project Setup Complete)</div>
+    </div>
+
+    <div class="phase-legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background: #8B5CF6;"></div>
+            <span>Phase 1: Setup</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #3B82F6;"></div>
+            <span>Phase 2: Core Features</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #F59E0B;"></div>
+            <span>Phase 3: Polish</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #06B6D4;"></div>
+            <span>Phase 4: Testing</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #10B981;"></div>
+            <span>Phase 5: Deployment</span>
+        </div>
+    </div>
+
+    <div class="kanban-container">
+        <!-- PLANNING -->
+        <div class="column planning" data-status="planning">
+            <div class="column-header">
+                <div class="column-title">PLANNING</div>
+                <div class="column-count">7</div>
+            </div>
+            
+            <div class="card" draggable="true" data-id="task-future-1">
+                <div class="card-title">Enhanced Scenario Development</div>
+                <div class="card-description">Create additional Gaza-focused scenarios with deeper psychological analysis and broader perspective coverage</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Future</span>
+                    <span class="card-assignee">Content Team</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-future-2">
+                <div class="card-title">AI Integration Enhancement</div>
+                <div class="card-description">Implement advanced AI features for personalized content generation and empathy assessment</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-low">Low</span>
+                    <span class="card-phase">Future</span>
+                    <span class="card-assignee">AI Team</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-future-3">
+                <div class="card-title">Multi-language Support</div>
+                <div class="card-description">Add Arabic, Hebrew, and other language support for broader accessibility</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-low">Low</span>
+                    <span class="card-phase">Future</span>
+                    <span class="card-assignee">Localization</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-future-4">
+                <div class="card-title">User Authentication System</div>
+                <div class="card-description">Implement user accounts with cloud sync and cross-device progress tracking</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Future</span>
+                    <span class="card-assignee">Backend Team</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-future-5">
+                <div class="card-title">Advanced Analytics Dashboard</div>
+                <div class="card-description">Create detailed empathy analytics with community insights and impact metrics</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Future</span>
+                    <span class="card-assignee">Analytics Team</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-future-6">
+                <div class="card-title">Voice Narration Feature</div>
+                <div class="card-description">Add voice narration for scenarios to enhance accessibility and immersion</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-low">Low</span>
+                    <span class="card-phase">Future</span>
+                    <span class="card-assignee">Audio Team</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-future-7">
+                <div class="card-title">Educational Institution Integration</div>
+                <div class="card-description">Develop educator tools and curriculum integration features for schools and universities</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Future</span>
+                    <span class="card-assignee">Education Team</span>
+                </div>
+            </div>
+            
+            <div class="add-card-btn" onclick="openAddCardModal('planning')">
+                + Add New Task
+            </div>
+        </div>
+
+        <!-- TODO -->
+        <div class="column todo" data-status="todo">
+            <div class="column-header">
+                <div class="column-title">TODO</div>
+                <div class="column-count">12</div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase2-1">
+                <div class="card-title">Enhanced Scenario Data</div>
+                <div class="card-description">Implement detailed Gaza scenarios following the dev guide specifications with multiple perspectives</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 2</span>
+                    <span class="card-assignee">Content Developer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase2-2">
+                <div class="card-title">Game State Management</div>
+                <div class="card-description">Enhance EmpathyGame component with comprehensive state management and user profile handling</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 2</span>
+                    <span class="card-assignee">Frontend Developer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase2-3">
+                <div class="card-title">Analytics Implementation</div>
+                <div class="card-description">Build comprehensive analytics dashboard with Recharts integration and empathy tracking</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 2</span>
+                    <span class="card-assignee">Frontend Developer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase2-4">
+                <div class="card-title">Global Impact Features</div>
+                <div class="card-description">Create global impact view with community statistics and humanitarian organization links</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Phase 2</span>
+                    <span class="card-assignee">Frontend Developer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase3-1">
+                <div class="card-title">Performance Optimization</div>
+                <div class="card-description">Implement React.memo, lazy loading, and bundle optimization for production readiness</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Phase 3</span>
+                    <span class="card-assignee">Performance Engineer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase3-2">
+                <div class="card-title">Mobile Responsiveness</div>
+                <div class="card-description">Optimize all components for mobile devices with touch-friendly interactions</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 3</span>
+                    <span class="card-assignee">UI/UX Developer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase3-3">
+                <div class="card-title">Accessibility Implementation</div>
+                <div class="card-description">Add ARIA labels, keyboard navigation, and screen reader support for WCAG compliance</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 3</span>
+                    <span class="card-assignee">Accessibility Specialist</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase3-4">
+                <div class="card-title">Error Handling & Loading States</div>
+                <div class="card-description">Implement comprehensive error boundaries and loading state management</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Phase 3</span>
+                    <span class="card-assignee">Frontend Developer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase4-1">
+                <div class="card-title">Component Testing Suite</div>
+                <div class="card-description">Create comprehensive test suite with React Testing Library and Jest</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Phase 4</span>
+                    <span class="card-assignee">QA Engineer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase4-2">
+                <div class="card-title">Cross-browser Testing</div>
+                <div class="card-description">Test application compatibility across Chrome, Firefox, Safari, and Edge</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Phase 4</span>
+                    <span class="card-assignee">QA Engineer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase5-1">
+                <div class="card-title">Netlify Deployment Configuration</div>
+                <div class="card-description">Set up production deployment with proper build settings and environment configuration</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 5</span>
+                    <span class="card-assignee">DevOps Engineer</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase5-2">
+                <div class="card-title">Documentation Completion</div>
+                <div class="card-description">Complete README, contributing guidelines, and deployment documentation</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-medium">Medium</span>
+                    <span class="card-phase">Phase 5</span>
+                    <span class="card-assignee">Technical Writer</span>
+                </div>
+            </div>
+            
+            <div class="add-card-btn" onclick="openAddCardModal('todo')">
+                + Add New Task
+            </div>
+        </div>
+
+        <!-- IN PROGRESS -->
+        <div class="column in-progress" data-status="in-progress">
+            <div class="column-header">
+                <div class="column-title">IN PROGRESS</div>
+                <div class="column-count">0</div>
+            </div>
+            
+            <div class="add-card-btn" onclick="openAddCardModal('in-progress')">
+                + Add New Task
+            </div>
+        </div>
+
+        <!-- TESTING -->
+        <div class="column testing" data-status="testing">
+            <div class="column-header">
+                <div class="column-title">TESTING</div>
+                <div class="column-count">0</div>
+            </div>
+            
+            <div class="add-card-btn" onclick="openAddCardModal('testing')">
+                + Add New Task
+            </div>
+        </div>
+
+        <!-- DONE -->
+        <div class="column done" data-status="done">
+            <div class="column-header">
+                <div class="column-title">DONE</div>
+                <div class="column-count">7</div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase1-1">
+                <div class="card-title">Project Initialization</div>
+                <div class="card-description">Created Next.js 14 project with TypeScript, Tailwind CSS, and required dependencies</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 1</span>
+                    <span class="card-assignee">✅ Complete</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase1-2">
+                <div class="card-title">TypeScript Configuration</div>
+                <div class="card-description">Set up strict TypeScript configuration with proper type definitions and interfaces</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 1</span>
+                    <span class="card-assignee">✅ Complete</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase1-3">
+                <div class="card-title">Project Structure Setup</div>
+                <div class="card-description">Created organized folder structure with app, components, lib directories and proper separation</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 1</span>
+                    <span class="card-assignee">✅ Complete</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase1-4">
+                <div class="card-title">Core Type Definitions</div>
+                <div class="card-description">Implemented comprehensive TypeScript interfaces for scenarios, perspectives, and user profiles</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 1</span>
+                    <span class="card-assignee">✅ Complete</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase1-5">
+                <div class="card-title">Basic Scenario Data</div>
+                <div class="card-description">Created initial Gaza-focused scenarios with multiple perspectives and educational content</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 1</span>
+                    <span class="card-assignee">✅ Complete</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase1-6">
+                <div class="card-title">Main Game Component</div>
+                <div class="card-description">Built EmpathyGame component with basic state management and scenario navigation</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 1</span>
+                    <span class="card-assignee">✅ Complete</span>
+                </div>
+            </div>
+
+            <div class="card" draggable="true" data-id="task-phase1-7">
+                <div class="card-title">Basic Navigation & Layout</div>
+                <div class="card-description">Implemented navigation bar, layout structure, and basic routing between pages</div>
+                <div class="card-meta">
+                    <span class="card-priority priority-high">High</span>
+                    <span class="card-phase">Phase 1</span>
+                    <span class="card-assignee">✅ Complete</span>
+                </div>
+            </div>
+            
+            <div class="add-card-btn" onclick="openAddCardModal('done')">
+                + Add New Task
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Card Modal -->
+    <div id="addCardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Add New Development Task</div>
+            <form id="addCardForm">
+                <div class="form-group">
+                    <label for="cardTitle">Task Title</label>
+                    <input type="text" id="cardTitle" required placeholder="Enter task title...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cardDescription">Description</label>
+                    <textarea id="cardDescription" required placeholder="Describe the task requirements and implementation details..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cardPriority">Priority</label>
+                    <select id="cardPriority" required>
+                        <option value="priority-high">High</option>
+                        <option value="priority-medium" selected>Medium</option>
+                        <option value="priority-low">Low</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardPhase">Development Phase</label>
+                    <select id="cardPhase" required>
+                        <option value="Phase 1">Phase 1: Setup</option>
+                        <option value="Phase 2" selected>Phase 2: Core Features</option>
+                        <option value="Phase 3">Phase 3: Polish</option>
+                        <option value="Phase 4">Phase 4: Testing</option>
+                        <option value="Phase 5">Phase 5: Deployment</option>
+                        <option value="Future">Future Enhancement</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cardAssignee">Assignee/Role</label>
+                    <input type="text" id="cardAssignee" placeholder="Developer, Designer, QA, etc." required>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddCardModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Drag and drop functionality
+        let draggedElement = null;
+
+        // Add drag event listeners to all cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('dragstart', function(e) {
+                draggedElement = this;
+                this.style.opacity = '0.5';
+            });
+
+            card.addEventListener('dragend', function(e) {
+                this.style.opacity = '1';
+                draggedElement = null;
+            });
+        });
+
+        // Add drop zone functionality to columns
+        document.querySelectorAll('.column').forEach(column => {
+            column.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+            });
+
+            column.addEventListener('dragleave', function(e) {
+                this.classList.remove('drag-over');
+            });
+
+            column.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                
+                if (draggedElement && draggedElement.parentNode !== this) {
+                    const addButton = this.querySelector('.add-card-btn');
+                    this.insertBefore(draggedElement, addButton);
+                    updateStats();
+                    updateProgress();
+                }
+            });
+        });
+
+        // Update statistics
+        function updateStats() {
+            const totalCards = document.querySelectorAll('.card').length;
+            const completedCards = document.querySelectorAll('.done .card').length;
+            const activeCards = document.querySelectorAll('.in-progress .card').length;
+            
+            document.getElementById('totalTasks').textContent = totalCards;
+            document.getElementById('completedTasks').textContent = completedCards;
+            document.getElementById('activeTasks').textContent = activeCards;
+            
+            // Update column counts
+            document.querySelectorAll('.column').forEach(column => {
+                const count = column.querySelectorAll('.card').length;
+                const countElement = column.querySelector('.column-count');
+                countElement.textContent = count;
+            });
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const totalCards = document.querySelectorAll('.card').length;
+            const doneCards = document.querySelectorAll('.done .card').length;
+            const progress = totalCards > 0 ? Math.round((doneCards / totalCards) * 100) : 0;
+            
+            document.querySelector('.progress-fill').style.width = progress + '%';
+            
+            let phase = "Project Setup";
+            if (progress >= 80) phase = "Ready for Deployment";
+            else if (progress >= 60) phase = "Testing & Polish";
+            else if (progress >= 40) phase = "Core Development";
+            else if (progress >= 20) phase = "Foundation Building";
+            
+            document.querySelector('.progress-text').textContent = `MVP Development Progress: ${progress}% Complete (${phase})`;
+        }
+
+        // Initialize stats on page load
+        updateStats();
+        updateProgress();
+
+        // Add click handler for task details
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('dblclick', function() {
+                const title = this.querySelector('.card-title').textContent;
+                const description = this.querySelector('.card-description').textContent;
+                const priority = this.querySelector('.card-priority').textContent;
+                const phase = this.querySelector('.card-phase')?.textContent || 'N/A';
+                const assignee = this.querySelector('.card-assignee').textContent;
+                
+                alert(`Task: ${title}\n\nDescription: ${description}\n\nPriority: ${priority}\nPhase: ${phase}\nAssignee: ${assignee}`);
+            });
+        });
+
+        // Modal functionality
+        let currentTargetColumn = null;
+        let cardCounter = 50;
+
+        function openAddCardModal(columnStatus) {
+            currentTargetColumn = columnStatus;
+            document.getElementById('addCardModal').style.display = 'block';
+            document.getElementById('cardTitle').focus();
+        }
+
+        function closeAddCardModal() {
+            document.getElementById('addCardModal').style.display = 'none';
+            document.getElementById('addCardForm').reset();
+            currentTargetColumn = null;
+        }
+
+        // Handle form submission
+        document.getElementById('addCardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('cardTitle').value;
+            const description = document.getElementById('cardDescription').value;
+            const priority = document.getElementById('cardPriority').value;
+            const phase = document.getElementById('cardPhase').value;
+            const assignee = document.getElementById('cardAssignee').value;
+            
+            // Create new card element
+            const newCard = document.createElement('div');
+            newCard.className = 'card';
+            newCard.draggable = true;
+            newCard.setAttribute('data-id', `task-${cardCounter++}`);
+            
+            newCard.innerHTML = `
+                <div class="card-title">${title}</div>
+                <div class="card-description">${description}</div>
+                <div class="card-meta">
+                    <span class="card-priority ${priority}">${priority.replace('priority-', '').charAt(0).toUpperCase() + priority.replace('priority-', '').slice(1)}</span>
+                    <span class="card-phase">${phase}</span>
+                    <span class="card-assignee">${assignee}</span>
+                </div>
+            `;
+            
+            // Add drag functionality to new card
+            newCard.addEventListener('dragstart', function(e) {
+                draggedElement = this;
+                this.style.opacity = '0.5';
+            });
+
+            newCard.addEventListener('dragend', function(e) {
+                this.style.opacity = '1';
+                draggedElement = null;
+            });
+
+            // Add double-click functionality
+            newCard.addEventListener('dblclick', function() {
+                const title = this.querySelector('.card-title').textContent;
+                const description = this.querySelector('.card-description').textContent;
+                const priority = this.querySelector('.card-priority').textContent;
+                const phase = this.querySelector('.card-phase')?.textContent || 'N/A';
+                const assignee = this.querySelector('.card-assignee').textContent;
+                
+                alert(`Task: ${title}\n\nDescription: ${description}\n\nPriority: ${priority}\nPhase: ${phase}\nAssignee: ${assignee}`);
+            });
+            
+            // Find target column and insert card before the "Add Card" button
+            const targetColumn = document.querySelector(`[data-status="${currentTargetColumn}"]`);
+            const addButton = targetColumn.querySelector('.add-card-btn');
+            targetColumn.insertBefore(newCard, addButton);
+            
+            // Update stats and progress
+            updateStats();
+            updateProgress();
+            
+            // Close modal
+            closeAddCardModal();
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === document.getElementById('addCardModal')) {
+                closeAddCardModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAddCardModal();
+            }
+        });
+
+        // Simulate timeline countdown (optional enhancement)
+        function updateTimeline() {
+            const startDate = new Date();
+            const targetDate = new Date();
+            targetDate.setDate(startDate.getDate() + 3);
+            
+            const timeRemaining = Math.ceil((targetDate - startDate) / (1000 * 60 * 60 * 24));
+            document.getElementById('timeRemaining').textContent = `${timeRemaining} Days`;
+        }
+
+        updateTimeline();
+    </script>
+</body>
+</html>
