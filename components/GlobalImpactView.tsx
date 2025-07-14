@@ -601,7 +601,7 @@ export function GlobalImpactView() {
                           resource.category === 'documentary' ? 'text-green-600 dark:text-green-400' :
                           resource.category === 'peace' ? 'text-purple-600 dark:text-purple-400' :
                           'text-gray-600 dark:text-gray-400'
-                        }`}>
+                        }`}
                       >
                         Learn More →
                       </a>
@@ -698,8 +698,8 @@ function ReflectionModal({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     // Get all completed scenarios with their reflections
     const userProfile = getLocalStorage('empathy-bridge-profile', {
-      completedScenarios: [],
-      empathyGrowth: []
+      completedScenarios: [] as number[],
+      empathyGrowth: [] as any[]
     })
 
     const reflectionData = userProfile.completedScenarios.map((scenarioId: number) => {
@@ -1027,7 +1027,10 @@ function DonationForm({
     if (!formData.recipientName || !formData.url) {
       return
     }
-    onSave(formData)
+    onSave({
+      ...formData,
+      dateAdded: donation?.dateAdded || new Date().toISOString()
+    })
   }
 
   return (
