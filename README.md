@@ -51,7 +51,28 @@ empathy-bridge/
 └── public/                  # Static assets
 ```
 
-## 🏃‍♂️ Getting Started
+## 🚀 Quick Deploy (No Technical Knowledge Required!)
+
+### Option 1: GitHub Pages (Recommended - 100% Free)
+
+1. **Fork this repository** by clicking the "Fork" button at the top right
+2. **Enable GitHub Pages** in your forked repository:
+   - Go to your forked repository on GitHub
+   - Click "Settings" tab
+   - Scroll down to "Pages" in the left sidebar
+   - Under "Source", select "GitHub Actions"
+3. **Wait for deployment** (about 2-3 minutes)
+4. **Access your app** at `https://yourusername.github.io/empathy-bridge`
+
+That's it! Your app will automatically update whenever you make changes to the repository.
+
+### Option 2: One-Click Deploy
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/empathy-bridge)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/empathy-bridge)
+
+## 🏃‍♂️ Local Development (For Developers)
 
 1. **Install dependencies**
    ```bash
@@ -187,6 +208,7 @@ empathy-bridge-theme            // Dark/light mode preference
 - **🛡️ No Account Required** - Anonymous usage
 - **⚡ Fast Performance** - No server requests needed
 - **🌐 Works Anywhere** - No regional restrictions
+- **💾 Data Backup** - Export/import your data for backup or transfer
 
 #### Data Size:
 - **Storage Usage**: ~2-5KB per user (very minimal)
@@ -199,7 +221,57 @@ Access your stored data through browser developer tools:
 2. Go to **Application** tab → **Local Storage**
 3. Find your domain → Look for `empathy-bridge-` keys
 
+### Backing Up Your Data
+**Export Your Progress**: Click "Export My Data" in the app to download a complete backup of your empathy journey, including all reflections, progress, and personal donations.
+
+**Import Your Progress**: Use "Import Data" to restore your backup on a new device or browser. Your entire empathy journey will be restored exactly as it was.
+
 This approach ensures your empathy journey remains completely personal and private. 🔐
+
+## 🆘 Deployment Troubleshooting
+
+### GitHub Pages Issues
+
+**Problem**: App shows 404 or blank page after deployment
+- **Solution**: Make sure you selected "GitHub Actions" as the source in Pages settings, not "Deploy from a branch"
+
+**Problem**: CSS/styling not loading properly
+- **Solution**: Wait 5-10 minutes after first deployment for CDN to update
+
+**Problem**: App works locally but not on GitHub Pages
+- **Solution**: Check that all file paths are relative and you haven't used any server-side features
+
+### General Issues
+
+**Problem**: Deployment failed in GitHub Actions
+- **Solution**: Check the Actions tab in your repository for error details. Most common issue is Node.js version - the workflow uses Node 18.
+
+**Problem**: Want to use a custom domain
+- **Solution**: In your repository settings under Pages, add your custom domain in the "Custom domain" field
+
+### Getting Help
+
+If you encounter issues:
+1. Check the [GitHub Actions log](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/using-workflow-run-logs) for specific error messages
+2. Ensure your repository is public (GitHub Pages requires public repos on free plan)
+3. Verify that GitHub Pages is enabled in your repository settings
+
+## 🔄 Updating Your Deployed App
+
+To update your deployed app with new content or features:
+
+### Via GitHub Web Interface (No technical knowledge needed)
+1. Go to your forked repository on GitHub
+2. Navigate to `/lib/resources.ts` 
+3. Click the pencil icon to edit
+4. Make your changes (add news, actions, organizations, etc.)
+5. Scroll down and click "Commit changes"
+6. Your app will automatically update in 2-3 minutes!
+
+### Adding New Scenarios
+1. Edit `/lib/scenarios.ts` through GitHub's web interface
+2. Follow the existing format to add new perspectives and scenarios
+3. Commit your changes and the app updates automatically
 
 ## 📊 Features in Detail
 
@@ -284,8 +356,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🔗 Links
 
 - [Live Demo](https://empathy-bridge.netlify.app) (when deployed)
-- [GitHub Repository](https://github.com/empathy-bridge/empathy-bridge)
-- [Documentation](docs/)
+- [GitHub Repository](https://github.com/rasha-salim/empathy-bridge)
 
 ## 💡 Support
 

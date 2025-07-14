@@ -99,7 +99,7 @@ export const newsItems: NewsItem[] = [
 export const actionItems: ActionItem[] = [
   {
     id: 1,
-    title: "Contact Your Representatives",
+    title: "Contact Your Representatives (USA)",
     description: "Call or email your elected officials about humanitarian aid for Gaza",
     type: "petition",
     difficulty: "easy",
@@ -136,6 +136,16 @@ export const actionItems: ActionItem[] = [
     timeRequired: "2-4 hours/weeks",
     impact: "Taking Action",
     url: "https://www.codepink.org/palestine"
+  }, 
+  {
+    id: 5,
+    title: "Tech For Palestine",
+    description: "Helps pro-Palestine advocates build, grow, and scale their work towards a Free Palestine",
+    type: "awareness",
+    difficulty: "medium",
+    timeRequired: "2-4 hours/weeks",
+    impact: "Taking Action",
+    url: "https://techforpalestine.org/"
   }
 ]
 
@@ -199,7 +209,7 @@ export const organizations: Organization[] = [
 export const actionApps: ActionApp[] = [
   {
     id: 1,
-    title: "Boycott (Boycat)",
+    title: "Boycat",
     description: "Scan barcodes to avoid products from companies supporting Israeli occupation",
     category: "boycott",
     features: [
@@ -210,6 +220,23 @@ export const actionApps: ActionApp[] = [
     ],
     platforms: {
       web: "https://www.boycat.io/",
+      android: "https://play.google.com/store/apps/details?id=com.boycat.app",
+      ios: "https://apps.apple.com/us/app/boycat-ethical-shopping/id6474510742"
+    },
+    icon: "Smartphone"
+  },
+  {
+    id: 2,
+    title: "No Thanks App",
+    description: "Scan barcodes to avoid products from companies supporting Israeli occupation",
+    category: "boycott",
+    features: [
+      "Barcode scanner for product verification",
+      "Real-time boycott database",
+      "Alternative product suggestions",
+      "Community-driven updates"
+    ],
+    platforms: {
       android: "https://play.google.com/store/apps/details?id=com.bashsoftware.boycott&hl=en",
       ios: "https://apps.apple.com/us/app/no-thanks-app/id6476206516"
     },

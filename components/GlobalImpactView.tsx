@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Globe, Users, Heart, ExternalLink, DollarSign, BookOpen, TrendingUp, MapPin, Share2, MessageCircle, Calendar, Video, FileText, Phone, Mail, Lightbulb, Target, Award, Clock, Plus, Edit2, Trash2, Save, X, Smartphone, Download } from 'lucide-react'
+import { Globe, Users, Heart, ExternalLink, DollarSign, BookOpen, TrendingUp, MapPin, Share2, MessageCircle, Calendar, Video, FileText, Phone, Mail, Lightbulb, Target, Award, Clock, Plus, Edit2, Trash2, Save, X, Smartphone, Download, Upload } from 'lucide-react'
 import { NavigationBar } from './NavigationBar'
 import { getLocalStorage, setLocalStorage } from '@/lib/utils'
 import { scenarios } from '@/lib/scenarios'
@@ -91,6 +91,77 @@ export function GlobalImpactView() {
       default:
         return <Target className="w-5 h-5 text-gray-500" />
     }
+  }
+
+  // Data export/import functions for user backup
+  const exportUserData = () => {
+    try {
+      const userData = {
+        profile: getLocalStorage('empathy-bridge-profile', {}),
+        donations: getLocalStorage('empathy-bridge-donations', []),
+        theme: getLocalStorage('empathy-bridge-theme', 'light'),
+        gameState: getLocalStorage('empathy-bridge-game-state', {}),
+        reflections: {}
+      }
+
+      // Get all reflection notes
+      const profile = userData.profile as any
+      if (profile.completedScenarios && Array.isArray(profile.completedScenarios)) {
+        profile.completedScenarios.forEach((scenarioId: number) => {
+          const reflection = getLocalStorage(`empathy-reflection-${scenarioId}`, '')
+          if (reflection) {
+            (userData.reflections as any)[`empathy-reflection-${scenarioId}`] = reflection
+          }
+        })
+      }
+
+      const dataStr = JSON.stringify(userData, null, 2)
+      const dataBlob = new Blob([dataStr], { type: 'application/json' })
+      
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(dataBlob)
+      link.download = `empathy-bridge-backup-${new Date().toISOString().split('T')[0]}.json`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+      alert('Your data has been exported successfully! Keep this file safe to restore your progress.')
+    } catch (error) {
+      alert('Error exporting data. Please try again.')
+      console.error('Export error:', error)
+    }
+  }
+
+  const handleImportData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const userData = JSON.parse(e.target?.result as string)
+        
+        // Restore main data
+        if (userData.profile) setLocalStorage('empathy-bridge-profile', userData.profile)
+        if (userData.donations) setLocalStorage('empathy-bridge-donations', userData.donations)
+        if (userData.theme) setLocalStorage('empathy-bridge-theme', userData.theme)
+        if (userData.gameState) setLocalStorage('empathy-bridge-game-state', userData.gameState)
+        
+        // Restore reflection notes
+        if (userData.reflections) {
+          Object.entries(userData.reflections).forEach(([key, value]) => {
+            setLocalStorage(key, value)
+          })
+        }
+        
+        alert('Data imported successfully! Please refresh the page to see your restored progress.')
+        setTimeout(() => window.location.reload(), 2000)
+      } catch (error) {
+        alert('Error importing data. Please make sure you selected a valid backup file.')
+        console.error('Import error:', error)
+      }
+    }
+    reader.readAsText(file)
   }
 
   const getDifficultyColor = (difficulty: string) => {
@@ -675,6 +746,23 @@ export function GlobalImpactView() {
               <Lightbulb className="w-4 h-4" />
               Reflect on Your Growth
             </button>
+            <button 
+              onClick={() => exportUserData()}
+              className="btn btn-secondary flex items-center gap-2"
+            >
+              <Download className="w-4 h-4" />
+              Export My Data
+            </button>
+            <label className="btn btn-secondary flex items-center gap-2 cursor-pointer">
+              <Upload className="w-4 h-4" />
+              Import Data
+              <input
+                type="file"
+                accept=".json"
+                onChange={handleImportData}
+                className="hidden"
+              />
+            </label>
           </div>
         </div>
       </div>
