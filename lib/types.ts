@@ -24,6 +24,7 @@ export interface EmpathyGrowthPoint {
   score: number;
   scenario: string;
   perspective: string;
+  scenarioId: number;
 }
 
 export interface UserProfile {
