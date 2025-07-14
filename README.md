@@ -325,14 +325,26 @@ The application is configured for static export and optimized for Netlify deploy
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for details.
+**We welcome contributions from everyone!** 🌍❤️
 
-### Development Guidelines
-- Follow TypeScript best practices
-- Use Tailwind CSS for styling
-- Maintain accessibility standards
-- Test on multiple devices
-- Keep components modular
+Whether you're an educator, humanitarian worker, developer, or simply someone who wants to help build empathy - there's a place for you in this project.
+
+### Ways to Contribute
+- **📝 Add Content**: Share scenarios, perspectives, and resources
+- **🌐 Create Your Own Version**: Fork and customize for your community  
+- **🛠️ Code**: Improve features, fix bugs, enhance accessibility
+- **📚 Documentation**: Help others understand and use the project
+- **🔍 Testing**: Report issues and suggest improvements
+
+**👉 See our [Contributing Guide](CONTRIBUTING.md) for detailed instructions.**
+
+### Quick Start for Contributors
+1. **Fork this repository** to your GitHub account
+2. **Follow setup instructions** in the Contributing Guide  
+3. **Make your changes** - no contribution is too small!
+4. **Reference the original repo** in your custom versions
+
+We especially encourage educators and humanitarian organizations to create specialized versions for their communities while maintaining attribution to the original project.
 
 ## 📚 Educational Use
 
