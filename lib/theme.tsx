@@ -17,7 +17,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true)
-    const savedTheme = localStorage.getItem('empathy-bridge-theme') as Theme
+    const savedTheme = localStorage.getItem('unboxing-empathy-theme') as Theme
     if (savedTheme) {
       setTheme(savedTheme)
     } else {
@@ -29,7 +29,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (mounted) {
-      localStorage.setItem('empathy-bridge-theme', theme)
+      localStorage.setItem('unboxing-empathy-theme', theme)
       if (theme === 'dark') {
         document.documentElement.classList.add('dark')
       } else {

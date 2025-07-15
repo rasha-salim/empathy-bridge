@@ -3,17 +3,17 @@ import './globals.css'
 import { ThemeProvider } from '@/lib/theme'
 
 export const metadata: Metadata = {
-  title: 'Empathy Bridge - Building Understanding Through Gaza Stories',
+  title: 'Unboxing Empathy - Building Understanding Through Gaza Stories',
   description: 'An interactive application to build empathy around the Gaza crisis through perspective-taking scenarios',
   keywords: ['empathy', 'Gaza', 'perspective-taking', 'education', 'humanitarian'],
-  authors: [{ name: 'Empathy Bridge Team' }],
+  authors: [{ name: 'Unboxing Empathy Team' }],
   icons: {
     icon: '/heart-icon.svg',
     shortcut: '/heart-icon.svg',
     apple: '/heart-icon.svg',
   },
   openGraph: {
-    title: 'Empathy Bridge - Building Understanding Through Gaza Stories',
+    title: 'Unboxing Empathy - Building Understanding Through Gaza Stories',
     description: 'An interactive application to build empathy around the Gaza crisis through perspective-taking scenarios',
     type: 'website',
   },

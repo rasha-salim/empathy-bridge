@@ -21,7 +21,7 @@ export function AnalyticsView() {
   const [selectedTab, setSelectedTab] = useState<'overview' | 'growth' | 'insights' | 'achievements'>('overview')
 
   useEffect(() => {
-    const profile = getLocalStorage<UserProfile>('empathy-bridge-profile', {
+    const profile = getLocalStorage<UserProfile>('unboxing-empathy-profile', {
       name: '',
       age: '',
       completedScenarios: [],
@@ -29,8 +29,12 @@ export function AnalyticsView() {
       achievements: []
     })
 
-    // Get saved session data for more accurate time tracking
-    const savedGameState = getLocalStorage('empathy-bridge-game-state', {})
+    // Calculate actual time spent from session durations
+    const actualTimeSpent = profile.empathyGrowth.reduce((total, point) => {
+      // Use actual session duration if available, otherwise fallback to 15 min estimate
+      const sessionTime = point.sessionDuration || 15
+      return total + sessionTime
+    }, 0)
     
     setAnalyticsData({
       totalScenarios: scenarios.length,
@@ -44,7 +48,7 @@ export function AnalyticsView() {
         sessionNumber: index + 1
       })),
       achievements: profile.achievements,
-      timeSpent: profile.completedScenarios.length * 15 // Estimate 15 minutes per scenario
+      timeSpent: actualTimeSpent
     })
   }, [])
 

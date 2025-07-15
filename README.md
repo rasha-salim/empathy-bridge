@@ -1,4 +1,4 @@
-# Empathy Bridge
+# Unboxing Empathy
 
 An interactive Next.js application designed to build empathy with others and was built specifically around the Palestinians (In Gaza and the Westbank) crisis through perspective-taking scenarios.
 
@@ -8,7 +8,7 @@ It is open source and available under the [MIT License](LICENSE).
 
 ## 🎯 Mission
 
-Empathy Bridge helps users understand complex humanitarian situations by experiencing multiple perspectives within the same scenario. Through interactive storytelling and psychological insights, users develop deeper empathy and understanding of the human impact of conflicts.
+Unboxing Empathy helps users understand complex humanitarian situations by experiencing multiple perspectives within the same scenario. Through interactive storytelling and psychological insights, users develop deeper empathy and understanding of the human impact of conflicts.
 
 ## 🚀 Features
 
@@ -31,7 +31,7 @@ Empathy Bridge helps users understand complex humanitarian situations by experie
 ## 📁 Project Structure
 
 ```
-empathy-bridge/
+unboxing-empathy/
 ├── app/
 │   ├── page.tsx              # Main game interface
 │   ├── analytics/page.tsx    # Analytics dashboard
@@ -58,13 +58,13 @@ empathy-bridge/
 **Step-by-Step Visual Guide:**
 
 #### Step 1: Fork the Repository
-1. **Go to**: https://github.com/rasha-salim/empathy-bridge
+1. **Go to**: https://github.com/rasha-salim/unboxing-empathy
 2. **Click the "Fork" button** in the top-right corner
 3. **Choose your account** as the destination
 4. **Wait for fork to complete** (usually takes 10-30 seconds)
 
 #### Step 2: Enable GitHub Pages
-1. **Go to your forked repository**: `https://github.com/YOURUSERNAME/empathy-bridge`
+1. **Go to your forked repository**: `https://github.com/YOURUSERNAME/unboxing-empathy`
 2. **Click the "Settings" tab** (near the top of the page)
 3. **Scroll down** and click "Pages" in the left sidebar
 4. **Under "Source"**: Select "GitHub Actions" (NOT "Deploy from a branch")
@@ -77,8 +77,8 @@ empathy-bridge/
 4. **If it fails**: Check the error log and ensure you selected "GitHub Actions" in Step 2
 
 #### Step 4: Access Your App
-1. **Your app is now live at**: `https://YOURUSERNAME.github.io/empathy-bridge`
-2. **Bookmark this URL** - this is your personal empathy bridge!
+1. **Your app is now live at**: `https://YOURUSERNAME.github.io/unboxing-empathy`
+2. **Bookmark this URL** - this is your personal empathy app!
 3. **Share with others** - they can use your version
 
 #### Step 5: Automatic Updates
@@ -91,14 +91,14 @@ empathy-bridge/
 **Step-by-Step Netlify Deployment:**
 
 #### Step 1: Fork the Repository (Same as GitHub Pages)
-1. **Go to**: https://github.com/rasha-salim/empathy-bridge
+1. **Go to**: https://github.com/rasha-salim/unboxing-empathy
 2. **Click "Fork"** and choose your account
 
 #### Step 2: Deploy to Netlify
 1. **Go to**: https://app.netlify.com/start
 2. **Click "Import from Git"**
 3. **Choose "GitHub"** and authorize Netlify to access your repositories
-4. **Select your forked repository**: `YOURUSERNAME/empathy-bridge`
+4. **Select your forked repository**: `YOURUSERNAME/unboxing-empathy`
 5. **Deploy settings** (Netlify will auto-detect):
    - **Build command**: `npm run build`
    - **Publish directory**: `out`
@@ -117,7 +117,7 @@ empathy-bridge/
 
 ### Option 3: Vercel (Another Alternative)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/rasha-salim/empathy-bridge)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/rasha-salim/unboxing-empathy)
 
 **Quick Vercel Steps:**
 1. **Click the button above**
@@ -134,7 +134,7 @@ empathy-bridge/
 | **Custom Domain** | ✅ Free | ✅ Free on paid plans | ✅ Free on paid plans |
 | **Automatic Updates** | ✅ Yes | ✅ Yes | ✅ Yes |
 | **Setup Difficulty** | Easy | Easy | Easiest |
-| **URL Format** | `username.github.io/empathy-bridge` | `sitename.netlify.app` | `sitename.vercel.app` |
+| **URL Format** | `username.github.io/unboxing-empathy` | `sitename.netlify.app` | `sitename.vercel.app` |
 | **Best For** | Open source projects | General websites | Developer projects |
 
 **🏆 Recommendation**: Start with **GitHub Pages** if you want everything in one place, or **Netlify** if you prefer a dedicated hosting platform.
@@ -274,11 +274,11 @@ All user data is stored locally in your browser using localStorage - **no server
 
 #### Storage Keys:
 ```
-empathy-bridge-profile          // Main user profile data
-empathy-reflection-{scenarioId} // Individual reflection notes (e.g., empathy-reflection-1)
-empathy-bridge-game-state       // Current game state for auto-save
-empathy-bridge-donations        // Personal donation/campaign links
-empathy-bridge-theme            // Dark/light mode preference
+unboxing-empathy-profile          // Main user profile data
+unboxing-empathy-reflection-{scenarioId} // Individual reflection notes (e.g., unboxing-empathy-reflection-1)
+unboxing-empathy-game-state       // Current game state for auto-save
+unboxing-empathy-donations        // Personal donation/campaign links
+unboxing-empathy-theme            // Dark/light mode preference
 ```
 
 #### Data Persistence:
@@ -306,7 +306,7 @@ empathy-bridge-theme            // Dark/light mode preference
 Access your stored data through browser developer tools:
 1. Open **Developer Tools** (F12)
 2. Go to **Application** tab → **Local Storage**
-3. Find your domain → Look for `empathy-bridge-` keys
+3. Find your domain → Look for `unboxing-empathy-` keys
 
 ### Backing Up Your Data
 **Export Your Progress**: Click "Export My Data" in the app to download a complete backup of your empathy journey, including all reflections, progress, and personal donations.
@@ -463,8 +463,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🔗 Links
 
-- [Live Demo](https://empathy-bridge.netlify.app) (when deployed)
-- [GitHub Repository](https://github.com/rasha-salim/empathy-bridge)
+- [Live Demo](https://unboxing-empathy.netlify.app) (when deployed)
+- [GitHub Repository](https://github.com/rasha-salim/unboxing-empathy)
 
 ## 💡 Support
 

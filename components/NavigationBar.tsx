@@ -21,7 +21,7 @@ export function NavigationBar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2 text-xl font-bold text-gray-800 dark:text-gray-200">
             <Heart className="w-6 h-6 text-accent" />
-            Empathy Bridge
+            Unboxing Empathy
           </Link>
           
           <div className="flex items-center gap-1">

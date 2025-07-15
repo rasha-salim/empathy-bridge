@@ -1,4 +1,4 @@
-// Centralized resource management for Empathy Bridge
+// Centralized resource management for Unboxing Empathy
 // Edit this file to add, remove, or modify resources
 
 export interface NewsItem {

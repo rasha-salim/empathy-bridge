@@ -53,7 +53,26 @@ export const scenarios: Scenario[] = [
       'Economic constraints limit educational alternatives',
       'International education aid distribution challenges',
       'Community displacement disrupts student populations'
-    ]
+    ],
+    empathyQuestions: {
+      beforeReflection: [
+        "What emotions did you experience while reading these different perspectives?",
+        "Which perspective challenged your initial assumptions about education in conflict zones?",
+        "How do the different needs of each person create a complex web of challenges?",
+        "What common hopes do you see shared across all these perspectives?"
+      ],
+      betweenPerspectives: [
+        "How might this person's experience connect to the previous perspective you read?",
+        "What do you think this person needs most right now to feel supported?",
+        "If you were in this situation, what would be your biggest concern?"
+      ],
+      perspectiveSpecific: {
+        0: ["How might a 10-year-old process this disruption to their routine?"],
+        1: ["What drives teachers to continue their mission despite these challenges?"],
+        2: ["How do parents balance protecting their children while maintaining hope?"],
+        3: ["What leadership qualities emerge when communities face educational crises?"]
+      }
+    }
   },
   {
     id: 2,
@@ -107,7 +126,25 @@ export const scenarios: Scenario[] = [
       'International aid coordination challenges',
       'Power grid instability affecting medical equipment',
       'Medical staff brain drain due to unsafe conditions'
-    ]
+    ],
+    empathyQuestions: {
+      beforeReflection: [
+        "How did reading about healthcare challenges affect your understanding of medical care in crisis zones?",
+        "What trade-offs and impossible decisions did you notice across these perspectives?",
+        "Which perspective helped you understand the human cost of medical resource shortages?",
+        "What resilience and dedication did you observe in each person's response?"
+      ],
+      betweenPerspectives: [
+        "How does this person's role create unique pressures in this medical crisis?",
+        "What support would make the biggest difference for this person right now?",
+        "How might this person's stress affect others around them?"
+      ],
+      perspectiveSpecific: {
+        0: ["What keeps healthcare workers motivated in impossible situations?"],
+        1: ["How do patients maintain hope when medical help is uncertain?"],
+        2: ["How do families cope when their loved one's health is at risk?"]
+      }
+    }
   },
   {
     id: 3,
@@ -161,7 +198,25 @@ export const scenarios: Scenario[] = [
       'Psychological trauma impacts family dynamics',
       'Aid distribution challenges create inequality',
       'Social services overwhelmed by demand'
-    ]
+    ],
+    empathyQuestions: {
+      beforeReflection: [
+        "How did experiencing these perspectives change your understanding of displacement?",
+        "What different coping strategies did you notice across the family members?",
+        "Which perspective helped you understand the complexity of maintaining family bonds during crisis?",
+        "What sources of strength and resilience did you observe in this family?"
+      ],
+      betweenPerspectives: [
+        "How might this family member's age or role affect their experience of displacement?",
+        "What would this person need most to feel some sense of normalcy?",
+        "How does this person contribute to the family's survival and emotional wellbeing?"
+      ],
+      perspectiveSpecific: {
+        0: ["How do parents maintain hope and dignity for their children during displacement?"],
+        1: ["How do teenagers process losing their home and normal social connections?"],
+        2: ["What drives community members to help others even when they're struggling themselves?"]
+      }
+    }
   },
   {
     id: 4,
@@ -215,7 +270,25 @@ export const scenarios: Scenario[] = [
       'Global audience fatigue impacts story reception',
       'Economic pressures influence editorial decisions',
       'Cultural barriers affect story understanding'
-    ]
+    ],
+    empathyQuestions: {
+      beforeReflection: [
+        "How did these perspectives change your understanding of journalism in conflict zones?",
+        "What ethical dilemmas did you notice that journalists and communities face?",
+        "Which perspective helped you understand the complexity of truth-telling in crisis?",
+        "What different types of courage did you observe across these perspectives?"
+      ],
+      betweenPerspectives: [
+        "How does this person's role affect their relationship with information and media?",
+        "What risks or responsibilities does this person carry that others might not see?",
+        "How might this person's actions impact the broader conversation about this crisis?"
+      ],
+      perspectiveSpecific: {
+        0: ["What motivates journalists to risk their safety to document truth?"],
+        1: ["How do families balance supporting journalists while protecting themselves?"],
+        2: ["What role do communities play in shaping how their stories are told?"]
+      }
+    }
   },
   {
     id: 5,
@@ -269,7 +342,26 @@ export const scenarios: Scenario[] = [
       'Local capacity building often underfunded',
       'International funding priorities may not match local needs',
       'Coordination between aid agencies requires ongoing effort'
-    ]
+    ],
+    empathyQuestions: {
+      beforeReflection: [
+        "How did experiencing the perspectives of both aid workers and recipients change your understanding of humanitarian work?",
+        "What challenges did you notice that affect the effectiveness of international aid?",
+        "Which perspective helped you understand the complexity of maintaining dignity while receiving help?",
+        "What different forms of strength and resilience did you observe across these perspectives?"
+      ],
+      betweenPerspectives: [
+        "How might this person's cultural background shape their approach to giving or receiving help?",
+        "What would help this person feel more empowered in this situation?",
+        "How does this person's experience contribute to the broader aid ecosystem?"
+      ],
+      perspectiveSpecific: {
+        0: ["What motivates people to leave their comfort zones to help others in crisis?"],
+        1: ["How do local community members balance gratitude with the desire for self-sufficiency?"],
+        2: ["What wisdom do long-term crisis survivors offer about effective aid?"],
+        3: ["How do young people contribute to their communities during humanitarian crises?"]
+      }
+    }
   }
 ]
 

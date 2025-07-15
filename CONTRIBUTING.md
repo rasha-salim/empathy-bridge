@@ -1,16 +1,16 @@
-# Contributing to Empathy Bridge
+# Contributing to Unboxing Empathy
 
-Thank you for your interest in contributing to Empathy Bridge! <d This project aims to build empathy and understanding around humanitarian crises, and we welcome contributions from people of all backgrounds and skill levels.
+Thank you for your interest in contributing to Unboxing Empathy! <d This project aims to build empathy and understanding around humanitarian crises, and we welcome contributions from people of all backgrounds and skill levels.
 
-## <¯ Our Mission
+## <ï¿½ Our Mission
 
-Empathy Bridge helps people understand complex humanitarian situations by experiencing multiple perspectives. Every contribution helps make empathy education more accessible worldwide.
+Unboxing Empathy helps people understand complex humanitarian situations by experiencing multiple perspectives. Every contribution helps make empathy education more accessible worldwide.
 
 ## > How to Contribute
 
 ### For Everyone (No Coding Required!)
 
-#### =Ý Content Contributions
+#### =ï¿½ Content Contributions
 - **Add new scenarios**: Share stories and perspectives from Gaza or other humanitarian situations
 - **Improve existing content**: Enhance scenario descriptions, add cultural context
 - **Translate content**: Help make the app accessible in multiple languages
@@ -25,32 +25,32 @@ Empathy Bridge helps people understand complex humanitarian situations by experi
 
 ### For Developers
 
-#### =à Technical Contributions
+#### =ï¿½ Technical Contributions
 - **Bug fixes**: Help resolve issues and improve stability
 - **New features**: Add functionality that enhances empathy building
 - **Performance improvements**: Optimize for better user experience
 - **Accessibility**: Ensure the app works for users with disabilities
 - **Mobile optimization**: Improve mobile and tablet experience
 
-## =€ Getting Started
+## =ï¿½ Getting Started
 
 ### 1. Fork and Deploy Your Own Version
 
-**Anyone can create their own version of Empathy Bridge:**
+**Anyone can create their own version of Unboxing Empathy:**
 
 1. **Fork this repository** to your GitHub account
 2. **Deploy automatically** using GitHub Pages (see README for instructions)
 3. **Customize for your needs** - add local content, translate, or adapt for specific audiences
 4. **Share your version** while referencing the original project
 
-**Your custom version URL will be:** `https://yourusername.github.io/empathy-bridge`
+**Your custom version URL will be:** `https://yourusername.github.io/unboxing-empathy`
 
 ### 2. Set Up Development Environment
 
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/empathy-bridge.git
-cd empathy-bridge
+git clone https://github.com/yourusername/unboxing-empathy.git
+cd unboxing-empathy
 
 # Install dependencies
 npm install
@@ -89,7 +89,7 @@ npm run dev
    git commit -m "Add new Gaza family perspective scenario"
    ```
 
-## =Ë Contribution Guidelines
+## =ï¿½ Contribution Guidelines
 
 ### Content Standards
 
@@ -135,14 +135,14 @@ npm run dev
 
 ### Custom Versions are Encouraged!
 
-We **actively encourage** creating specialized versions of Empathy Bridge:
+We **actively encourage** creating specialized versions of Unboxing Empathy:
 
-#### <“ Educational Institutions
+#### <ï¿½ Educational Institutions
 - Adapt content for specific grade levels
 - Add curriculum-specific scenarios
 - Include assessment tools for educators
 
-#### <Û Humanitarian Organizations
+#### <ï¿½ Humanitarian Organizations
 - Feature your organization's work
 - Add region-specific content
 - Include your donation and volunteer opportunities
@@ -163,10 +163,10 @@ We **actively encourage** creating specialized versions of Empathy Bridge:
 
 1. **Keep the attribution** in your README:
    ```markdown
-   # My Custom Empathy Bridge
+   # My Custom Unboxing Empathy
    
-   Based on [Empathy Bridge](https://github.com/rasha-salim/empathy-bridge) 
-   by [Original Repository](https://github.com/rasha-salim/empathy-bridge)
+   Based on [Unboxing Empathy](https://github.com/rasha-salim/unboxing-empathy) 
+   by [Original Repository](https://github.com/rasha-salim/unboxing-empathy)
    
    ## Changes Made
    - [List your customizations]
@@ -174,7 +174,7 @@ We **actively encourage** creating specialized versions of Empathy Bridge:
 
 2. **Reference in your app footer:**
    ```
-   Powered by Empathy Bridge | Original: github.com/rasha-salim/empathy-bridge
+   Powered by Unboxing Empathy | Original: github.com/rasha-salim/unboxing-empathy
    ```
 
 3. **Share your improvements** - if you create something that could benefit the main project, please contribute it back!
@@ -183,7 +183,7 @@ We **actively encourage** creating specialized versions of Empathy Bridge:
 
 ### Bug Reports
 **Before submitting:**
-1. Check if the issue already exists in [GitHub Issues](https://github.com/rasha-salim/empathy-bridge/issues)
+1. Check if the issue already exists in [GitHub Issues](https://github.com/rasha-salim/unboxing-empathy/issues)
 2. Try to reproduce the bug in a clean browser session
 3. Check if it happens on multiple devices/browsers
 
@@ -201,7 +201,7 @@ We **actively encourage** creating specialized versions of Empathy Bridge:
 - Examples of how it might work
 - Whether you're willing to help implement it
 
-## =¡ Content Addition Examples
+## =ï¿½ Content Addition Examples
 
 ### Adding a New Scenario
 
@@ -282,7 +282,7 @@ Special recognition for:
 - **Developers** who implement requested features
 - **Translators** who make content accessible in new languages
 
-## =Þ Getting Help
+## =ï¿½ Getting Help
 
 ### Questions?
 - **GitHub Discussions**: For general questions and ideas
@@ -307,7 +307,7 @@ We're especially interested in collaborating with:
 6. **Push** to your branch (`git push origin feature/amazing-feature`)
 7. **Open** a Pull Request with detailed description
 
-## – Code of Conduct
+## ï¿½ Code of Conduct
 
 ### Our Standards
 
@@ -333,23 +333,48 @@ Issues will be addressed by project maintainers through:
 
 We believe in education and growth, so we'll always try to help people understand our standards rather than immediately excluding them.
 
-## <¯ Project Roadmap
+## <ï¿½ Project Roadmap
 
-### Current Focus
-- **Content expansion**: More scenarios and perspectives
-- **Accessibility improvements**: Better screen reader support
-- **Performance optimization**: Faster loading and smoother interactions
-- **Mobile experience**: Enhanced touch and mobile-specific features
+### Interactive Empathy Experience - Phase 1 âœ… COMPLETED
+We've successfully implemented foundational interactive features that make the empathy experience more engaging and proactive:
 
-### Future Vision
-- **Multi-language support**: Starting with Arabic, Spanish, French
-- **Voice narration**: Audio versions of scenarios
-- **Educator tools**: Lesson plans and assessment features
-- **Offline support**: Full functionality without internet
-- **Advanced analytics**: Better insights into empathy development
+- **Progressive Revelation System**: Content reveals thoughtfully to encourage deeper reflection
+- **Interactive Empathy Questions**: Questions integrated throughout the experience, not just at the end
+- **Centralized Color Management**: Easy-to-edit emotion-based color schemes for better visual experience
+- **Dual View Options**: Users can choose between interactive and classic perspective views
+- **Subtle Animations**: Respectful timing and animations that enhance rather than distract
+
+### Current Development Priorities
+
+#### Phase 2: Adaptive Empathy System (Next 3-6 months)
+- **Dynamic Content Adaptation**: Scenarios that adapt based on user's empathy growth patterns
+- **Enhanced Analytics**: Heat maps and insights into empathy development
+- **Personalized Experience**: AI-driven content ordering based on user background
+- **Quality Assessment**: Analysis of reflection depth and empathy insights
+
+#### Phase 3: Community Empathy Building (6-12 months)
+- **Collaborative Features**: Small group discussions and empathy circles
+- **Social Impact Integration**: Real-world action tracking and impact visualization
+- **Content Expansion**: User-generated scenarios and community-created content
+- **Regional Adaptation**: Localized content for different communities
+
+#### Phase 4: Immersive Experience (1-2 years)
+- **Advanced Interaction**: Voice integration, gesture-based interaction
+- **Accessibility Expansion**: Enhanced support for users with disabilities
+- **Multi-Modal Experience**: Integration of audio, visual, and tactile elements
+- **Platform Expansion**: Mobile apps and cross-platform synchronization
+
+### Complete Development Roadmap
+For detailed information about all development phases, contribution opportunities, and technical implementation plans, see our comprehensive **[ROADMAP.md](ROADMAP.md)**.
 
 ### How You Can Help Shape This
 Your contributions directly influence our roadmap! The most requested features and the areas where we receive the most help naturally become our priorities.
+
+#### Current Contribution Opportunities
+- **Phase 1 Testing**: Test the new interactive features and provide feedback
+- **Content Enhancement**: Improve empathy questions and scenario content
+- **Accessibility Testing**: Ensure the interface works with assistive technologies
+- **Performance Optimization**: Help optimize the interactive animations and transitions
 
 ---
 

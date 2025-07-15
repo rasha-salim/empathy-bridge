@@ -6,6 +6,7 @@ import { scenarios } from '@/lib/scenarios'
 import { GameState, UserProfile, EmpathyGrowthPoint } from '@/lib/types'
 import { getLocalStorage, setLocalStorage } from '@/lib/utils'
 import { NavigationBar } from './NavigationBar'
+import { InteractivePerspectiveCard } from './InteractivePerspectiveCard'
 
 export function EmpathyGame() {
   const [gameState, setGameState] = useState<GameState>({
@@ -26,16 +27,23 @@ export function EmpathyGame() {
   const [userForm, setUserForm] = useState({ name: '', age: '' })
   const [empathyReflection, setEmpathyReflection] = useState('')
   const [sessionStartTime, setSessionStartTime] = useState<Date | null>(null)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [empathyResponses, setEmpathyResponses] = useState<{ [key: string]: string }>({})
+  const [useInteractiveCard, setUseInteractiveCard] = useState(true)
 
   // Load saved profile and check for user setup
   useEffect(() => {
-    const savedProfile = getLocalStorage<UserProfile>('empathy-bridge-profile', {
+    const savedProfile = getLocalStorage<UserProfile>('unboxing-empathy-profile', {
       name: '',
       age: '',
       completedScenarios: [],
       empathyGrowth: [],
       achievements: []
     })
+    
+    // Load theme preference
+    const savedTheme = getLocalStorage<boolean>('unboxing-empathy-theme', false)
+    setIsDarkMode(savedTheme)
     
     setGameState(prev => ({
       ...prev,
@@ -53,8 +61,8 @@ export function EmpathyGame() {
   useEffect(() => {
     const saveInterval = setInterval(() => {
       if (gameState.userProfile.name) {
-        setLocalStorage('empathy-bridge-profile', gameState.userProfile)
-        setLocalStorage('empathy-bridge-game-state', {
+        setLocalStorage('unboxing-empathy-profile', gameState.userProfile)
+        setLocalStorage('unboxing-empathy-game-state', {
           currentScenarioId: gameState.currentScenario?.id,
           currentPerspectiveIndex: gameState.currentPerspectiveIndex,
           gamePhase: gameState.gamePhase,
@@ -111,7 +119,7 @@ export function EmpathyGame() {
       userProfile: updatedProfile
     }))
     
-    setLocalStorage('empathy-bridge-profile', updatedProfile)
+    setLocalStorage('unboxing-empathy-profile', updatedProfile)
     setShowUserSetup(false)
   }
 
@@ -166,15 +174,21 @@ export function EmpathyGame() {
 
     const empathyScore = calculateEmpathyScore()
     
+    // Calculate actual session duration in minutes
+    const sessionDuration = sessionStartTime 
+      ? Math.round((new Date().getTime() - sessionStartTime.getTime()) / 1000 / 60)
+      : 0
+    
     // Save the reflection notes to localStorage
-    setLocalStorage(`empathy-reflection-${gameState.currentScenario.id}`, empathyReflection)
+    setLocalStorage(`unboxing-empathy-reflection-${gameState.currentScenario.id}`, empathyReflection)
     
     const empathyGrowthPoint: EmpathyGrowthPoint = {
       date: new Date().toISOString(),
       score: empathyScore,
       scenario: gameState.currentScenario.title,
       perspective: gameState.currentScenario.perspectives.map(p => p.role).join(', '),
-      scenarioId: gameState.currentScenario.id
+      scenarioId: gameState.currentScenario.id,
+      sessionDuration: sessionDuration
     }
 
     const updatedProfile = {
@@ -186,7 +200,7 @@ export function EmpathyGame() {
     // Check for new achievements
     updatedProfile.achievements = checkAchievements(updatedProfile)
 
-    setLocalStorage('empathy-bridge-profile', updatedProfile)
+    setLocalStorage('unboxing-empathy-profile', updatedProfile)
     
     setGameState(prev => ({
       ...prev,
@@ -223,6 +237,19 @@ export function EmpathyGame() {
 
   const togglePause = () => {
     setIsPaused(!isPaused)
+  }
+
+  const handleSectionReveal = (sectionType: string) => {
+    // Track section reveal for analytics
+    console.log(`Section revealed: ${sectionType}`)
+  }
+
+  const handleEmpathyResponse = (questionIndex: number, response: string) => {
+    const key = `${gameState.currentScenario?.id}-${gameState.currentPerspectiveIndex}-${questionIndex}`
+    setEmpathyResponses(prev => ({
+      ...prev,
+      [key]: response
+    }))
   }
 
   return (
@@ -274,7 +301,7 @@ export function EmpathyGame() {
             <div className="text-center mb-8">
               <Heart className="w-16 h-16 mx-auto mb-4 text-accent" />
               <h1 className="text-4xl font-bold text-gray-800 mb-4">
-                Welcome{gameState.userProfile.name ? `, ${gameState.userProfile.name}` : ''} to Empathy Bridge
+                Welcome{gameState.userProfile.name ? `, ${gameState.userProfile.name}` : ''} to Unboxing Empathy
               </h1>
               <p className="text-lg text-gray-600 mb-8">
                 Build deeper understanding through perspective-taking scenarios from Gaza
@@ -453,65 +480,94 @@ export function EmpathyGame() {
               </div>
             </div>
 
-            <div className={`card ${isPaused ? 'opacity-50' : ''}`}>
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-semibold">
-                    Perspective: {gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].role}
-                  </h2>
-                  <div className="flex items-center gap-2">
-                    {gameState.currentScenario.perspectives.map((_, index) => (
-                      <div
-                        key={index}
-                        className={`w-3 h-3 rounded-full ${
-                          index === gameState.currentPerspectiveIndex 
-                            ? 'bg-blue-600' 
-                            : index < gameState.currentPerspectiveIndex 
-                            ? 'bg-green-500' 
-                            : 'bg-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-blue-50 p-4 rounded-lg mb-4">
-                  <p className="text-sm text-blue-800 font-medium">Background</p>
-                  <p className="text-blue-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].background}</p>
-                </div>
+            {/* Perspective Progress Indicator */}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2">
+                {gameState.currentScenario.perspectives.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`w-3 h-3 rounded-full ${
+                      index === gameState.currentPerspectiveIndex 
+                        ? 'bg-blue-600' 
+                        : index < gameState.currentPerspectiveIndex 
+                        ? 'bg-green-500' 
+                        : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
               </div>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                Perspective {gameState.currentPerspectiveIndex + 1} of {gameState.currentScenario.perspectives.length}
+              </span>
+            </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-2">Thoughts</h4>
-                    <p className="text-gray-600">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].thoughts}</p>
+            {/* Interactive Perspective Card */}
+            <div className={`${isPaused ? 'opacity-50' : ''}`}>
+              {useInteractiveCard ? (
+                <InteractivePerspectiveCard
+                  perspective={gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex]}
+                  perspectiveIndex={gameState.currentPerspectiveIndex}
+                  empathyQuestions={gameState.currentScenario.empathyQuestions}
+                  isDarkMode={isDarkMode}
+                  onSectionReveal={handleSectionReveal}
+                  onEmpathyResponse={handleEmpathyResponse}
+                />
+              ) : (
+                <div className="card">
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h2 className="text-2xl font-semibold">
+                        Perspective: {gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].role}
+                      </h2>
+                    </div>
+                    <div className="bg-blue-50 p-4 rounded-lg mb-4">
+                      <p className="text-sm text-blue-800 font-medium">Background</p>
+                      <p className="text-blue-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].background}</p>
+                    </div>
                   </div>
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-green-800 mb-2">Feelings</h4>
-                    <p className="text-green-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].feelings}</p>
-                  </div>
-                  <div className="bg-purple-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-purple-800 mb-2">Needs</h4>
-                    <p className="text-purple-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].needs}</p>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-gray-800 mb-2">Thoughts</h4>
+                        <p className="text-gray-600">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].thoughts}</p>
+                      </div>
+                      <div className="bg-green-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-green-800 mb-2">Feelings</h4>
+                        <p className="text-green-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].feelings}</p>
+                      </div>
+                      <div className="bg-purple-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-purple-800 mb-2">Needs</h4>
+                        <p className="text-purple-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].needs}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="bg-orange-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-orange-800 mb-2">Physical Response</h4>
+                        <p className="text-orange-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].physiological}</p>
+                      </div>
+                      <div className="bg-red-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-red-800 mb-2">Long-term Impact</h4>
+                        <p className="text-red-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].longTermImpact}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <div className="space-y-4">
-                  <div className="bg-orange-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-orange-800 mb-2">Physical Response</h4>
-                    <p className="text-orange-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].physiological}</p>
-                  </div>
-                  <div className="bg-red-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-red-800 mb-2">Long-term Impact</h4>
-                    <p className="text-red-700">{gameState.currentScenario.perspectives[gameState.currentPerspectiveIndex].longTermImpact}</p>
-                  </div>
-                </div>
-              </div>
+              )}
 
               <div className="mt-8 flex justify-between items-center">
-                <span className="text-sm text-gray-500">
-                  Take time to deeply consider this perspective before continuing
-                </span>
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setUseInteractiveCard(!useInteractiveCard)}
+                    className="btn btn-secondary text-sm"
+                  >
+                    {useInteractiveCard ? 'Classic View' : 'Interactive View'}
+                  </button>
+                  <span className="text-sm text-gray-500">
+                    Take time to deeply consider this perspective before continuing
+                  </span>
+                </div>
                 <button
                   onClick={nextPerspective}
                   disabled={isPaused}

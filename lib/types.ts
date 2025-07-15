@@ -8,6 +8,14 @@ export interface Perspective {
   longTermImpact: string;
 }
 
+export interface EmpathyQuestions {
+  beforeReflection: string[];
+  betweenPerspectives?: string[];
+  perspectiveSpecific?: {
+    [perspectiveIndex: number]: string[];
+  };
+}
+
 export interface Scenario {
   id: number;
   title: string;
@@ -17,6 +25,7 @@ export interface Scenario {
   situation: string;
   perspectives: Perspective[];
   systemicFactors: string[];
+  empathyQuestions: EmpathyQuestions;
 }
 
 export interface EmpathyGrowthPoint {
@@ -25,6 +34,7 @@ export interface EmpathyGrowthPoint {
   scenario: string;
   perspective: string;
   scenarioId: number;
+  sessionDuration?: number; // Duration in minutes (optional for backward compatibility)
 }
 
 export interface UserProfile {

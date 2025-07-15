@@ -1,7 +1,7 @@
-# Empathy Bridge - Project Context
+# Unboxing Empathy - Project Context
 
 ## Project Overview
-Empathy Bridge is a Next.js application designed to build empathy around the Gaza crisis through interactive perspective-taking scenarios. The app will be open-source and deployed for free on Netlify.
+Unboxing Empathy is a Next.js application designed to build empathy around the Gaza crisis through interactive perspective-taking scenarios. The app will be open-source and deployed for free on Netlify.
 
 ## Technical Requirements
 
@@ -40,7 +40,7 @@ Empathy Bridge is a Next.js application designed to build empathy around the Gaz
 
 ### Folder Structure
 ```
-empathy-bridge/
+unboxing-empathy/
 ├── app/
 │   ├── page.tsx (main game)
 │   ├── analytics/page.tsx
