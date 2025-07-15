@@ -29,12 +29,29 @@ export function AnalyticsView() {
       achievements: []
     })
 
+    // Debug: Log the profile data to understand what's being loaded
+    console.log('Analytics Debug - Profile data:', profile)
+    console.log('Analytics Debug - Empathy growth entries:', profile.empathyGrowth)
+    console.log('Analytics Debug - Completed scenarios:', profile.completedScenarios)
+
     // Calculate actual time spent from session durations
-    const actualTimeSpent = profile.empathyGrowth.reduce((total, point) => {
-      // Use actual session duration if available, otherwise fallback to 15 min estimate
-      const sessionTime = point.sessionDuration || 15
-      return total + sessionTime
-    }, 0)
+    let actualTimeSpent = 0
+    
+    // If no scenarios completed, time should be 0
+    if (profile.empathyGrowth.length === 0) {
+      actualTimeSpent = 0
+    } else {
+      // Calculate time for completed scenarios
+      actualTimeSpent = profile.empathyGrowth.reduce((total, point) => {
+        // Only use fallback for genuinely old data that lacks sessionDuration
+        // For fresh sessions, if sessionDuration is missing, it means there's a bug
+        const sessionTime = point.sessionDuration !== undefined ? point.sessionDuration : 15
+        console.log('Analytics Debug - Processing point:', point, 'sessionTime:', sessionTime)
+        return total + sessionTime
+      }, 0)
+    }
+    
+    console.log('Analytics Debug - Final actualTimeSpent:', actualTimeSpent)
     
     setAnalyticsData({
       totalScenarios: scenarios.length,
