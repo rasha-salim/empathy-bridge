@@ -1,0 +1,55 @@
+{
+  "title": "التأثير العالمي",
+  "subtitle": "اطلع على كيف يخلق التعاطف التغيير",
+  "sections": {
+    "communityStats": "إحصائيات المجتمع",
+    "realWorldImpact": "التأثير في العالم الحقيقي",
+    "takeAction": "اتخذ إجراء",
+    "latestNews": "آخر الأخبار",
+    "organizations": "المنظمات"
+  },
+  "stats": {
+    "totalUsers": "إجمالي المستخدمين",
+    "scenariosCompleted": "السيناريوهات المكتملة",
+    "perspectivesExplored": "المنظورات المستكشفة",
+    "countriesReached": "البلدان التي تم الوصول إليها",
+    "empathyGrowthAverage": "متوسط نمو التعاطف",
+    "activeUsers": "المستخدمون النشطون"
+  },
+  "impact": {
+    "title": "خلق تغيير حقيقي",
+    "description": "من خلال بناء التعاطف، يساهم مجتمعنا في:",
+    "areas": {
+      "understanding": "زيادة التفاهم بين الثقافات",
+      "donations": "زيادة التبرعات الإنسانية",
+      "advocacy": "الإجراءات الدعوية المتخذة",
+      "education": "دعم المبادرات التعليمية",
+      "dialogue": "تسهيل الحوار بين الأديان",
+      "awareness": "رفع الوعي بالأزمة"
+    }
+  },
+  "actions": {
+    "title": "طرق المساعدة",
+    "description": "حوّل تعاطفك إلى عمل:",
+    "donate": "تبرع للمنظمات الإنسانية",
+    "volunteer": "تطوع مع المنظمات المحلية",
+    "advocate": "ادعم التغييرات السياسية",
+    "educate": "علّم الآخرين حول الأزمة",
+    "share": "شارك القصص وارفع الوعي",
+    "support": "ادعم المجتمعات المتضررة"
+  },
+  "news": {
+    "title": "آخر التحديثات",
+    "readMore": "اقرأ المزيد",
+    "source": "المصدر",
+    "published": "نُشر",
+    "category": "الفئة"
+  },
+  "organizations": {
+    "title": "المنظمات الشريكة",
+    "description": "المنظمات التي تعمل على المساعدة:",
+    "visitWebsite": "زيارة الموقع",
+    "learnMore": "تعلم المزيد",
+    "donate": "تبرع"
+  }
+}

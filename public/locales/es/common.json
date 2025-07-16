@@ -1,0 +1,65 @@
+{
+  "appName": "Unboxing Empathy",
+  "navigation": {
+    "game": "Game",
+    "analytics": "Analytics",
+    "impact": "Impact",
+    "darkMode": "Toggle dark mode"
+  },
+  "buttons": {
+    "continue": "Continue",
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "start": "Start",
+    "finish": "Finish",
+    "restart": "Restart",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "submit": "Submit",
+    "reset": "Reset"
+  },
+  "form": {
+    "name": "Name",
+    "age": "Age",
+    "email": "Email",
+    "required": "Required",
+    "optional": "Optional",
+    "placeholder": {
+      "name": "Enter your name",
+      "age": "Enter your age",
+      "email": "Enter your email"
+    }
+  },
+  "messages": {
+    "welcome": "Welcome to Unboxing Empathy",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "noData": "No data available",
+    "comingSoon": "Coming soon"
+  },
+  "time": {
+    "minutes": "minutes",
+    "hours": "hours",
+    "days": "days",
+    "weeks": "weeks",
+    "months": "months"
+  },
+  "empathy": {
+    "perspective": "Perspective",
+    "scenarios": "Scenarios",
+    "growth": "Growth",
+    "reflection": "Reflection",
+    "understanding": "Understanding",
+    "compassion": "Compassion"
+  },
+  "language": {
+    "english": "English",
+    "arabic": "العربية",
+    "french": "Français",
+    "spanish": "Español",
+    "selectLanguage": "Select Language"
+  }
+}

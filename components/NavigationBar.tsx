@@ -4,15 +4,18 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Heart, BarChart3, Globe, Home, Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/lib/theme'
+import { useTranslation } from '@/lib/language-context'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 export function NavigationBar() {
   const pathname = usePathname()
   const { theme, toggleTheme } = useTheme()
+  const { t } = useTranslation('common')
 
   const navItems = [
-    { href: '/', label: 'Game', icon: Heart },
-    { href: '/analytics', label: 'Analytics', icon: BarChart3 },
-    { href: '/global', label: 'Impact', icon: Globe }
+    { href: '/', label: t('navigation.game'), icon: Heart },
+    { href: '/analytics', label: t('navigation.analytics'), icon: BarChart3 },
+    { href: '/global', label: t('navigation.impact'), icon: Globe }
   ]
 
   return (
@@ -21,7 +24,7 @@ export function NavigationBar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2 text-xl font-bold text-gray-800 dark:text-gray-200">
             <Heart className="w-6 h-6 text-accent" />
-            Unboxing Empathy
+            {t('appName')}
           </Link>
           
           <div className="flex items-center gap-1">
@@ -45,11 +48,14 @@ export function NavigationBar() {
               )
             })}
             
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+            
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleTheme}
               className="p-2 ml-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Toggle dark mode"
+              aria-label={t('navigation.darkMode')}
             >
               {theme === 'light' ? (
                 <Moon className="w-5 h-5" />

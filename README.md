@@ -13,6 +13,8 @@ Unboxing Empathy helps users understand complex humanitarian situations by exper
 ## 🚀 Features
 
 - **Interactive Scenarios**: Experience Gaza-focused situations from multiple perspectives
+- **Multi-Language Support**: Available in English, Arabic (العربية), with French & Spanish coming soon
+- **RTL Layout Support**: Full right-to-left reading experience for Arabic users
 - **Empathy Analytics**: Track your empathy growth and insights over time
 - **Personal Impact**: Track your personal empathy journey and find meaningful actions
 - **Educational Content**: Learn about systemic factors and humanitarian context
@@ -23,10 +25,11 @@ Unboxing Empathy helps users understand complex humanitarian situations by exper
 
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS with RTL support
 - **Charts**: Recharts
 - **Icons**: Lucide React
-- **Deployment**: Netlify
+- **Internationalization**: Custom i18n system with 4 languages
+- **Deployment**: Netlify / GitHub Pages
 
 ## 📁 Project Structure
 
@@ -42,13 +45,21 @@ unboxing-empathy/
 │   ├── EmpathyGame.tsx      # Main game component
 │   ├── NavigationBar.tsx    # Navigation component
 │   ├── AnalyticsView.tsx    # Analytics dashboard
-│   └── GlobalImpactView.tsx # Global impact view
+│   ├── GlobalImpactView.tsx # Global impact view
+│   └── LanguageSwitcher.tsx # Language selection component
 ├── lib/
 │   ├── scenarios.ts         # Scenario data
 │   ├── resources.ts         # Centralized resource management
 │   ├── types.ts             # TypeScript definitions
-│   └── utils.ts             # Utility functions
-└── public/                  # Static assets
+│   ├── utils.ts             # Utility functions
+│   └── language-context.tsx # Internationalization context
+├── public/
+│   ├── locales/             # Translation files
+│   │   ├── en/              # English translations
+│   │   ├── ar/              # Arabic translations
+│   │   ├── fr/              # French translations (placeholders)
+│   │   └── es/              # Spanish translations (placeholders)
+│   └── ...                  # Other static assets
 ```
 
 ## 🚀 Quick Deploy (No Technical Knowledge Required!)
@@ -174,13 +185,50 @@ unboxing-empathy/
 3. **Open in browser**
    Navigate to `http://localhost:3000`
 
+## 🌍 Multi-Language Support
+
+### Available Languages
+- **🇺🇸 English** - Complete translation
+- **🇸🇦 Arabic (العربية)** - Complete translation with RTL support
+- **🇫🇷 French (Français)** - Coming soon (framework ready)
+- **🇪🇸 Spanish (Español)** - Coming soon (framework ready)
+
+### Features
+- **Language Switcher**: Click the globe icon in the navigation to change languages
+- **RTL Support**: Full right-to-left layout for Arabic users
+- **Persistent Preferences**: Your language choice is saved across sessions
+- **Culturally Sensitive**: Translations respect cultural context and sensitivity
+- **Seamless Switching**: Change languages instantly without page reload
+
+### Translation Status
+| Component | English | Arabic | French | Spanish |
+|-----------|---------|---------|---------|---------|
+| **Navigation** | ✅ Complete | ✅ Complete | ⏳ Pending | ⏳ Pending |
+| **Game Interface** | ✅ Complete | ✅ Complete | ⏳ Pending | ⏳ Pending |
+| **Analytics Dashboard** | ✅ Complete | ✅ Complete | ⏳ Pending | ⏳ Pending |
+| **Impact View** | ✅ Complete | ✅ Complete | ⏳ Pending | ⏳ Pending |
+| **Scenario Content** | ✅ Complete | ⏳ Pending | ⏳ Pending | ⏳ Pending |
+
+### Contributing Translations
+We welcome native speakers to help complete translations:
+1. **Fork the repository**
+2. **Navigate to** `/public/locales/[language]/`
+3. **Edit JSON files** with accurate translations
+4. **Submit a pull request**
+
+**Priority areas for translation:**
+- Complete scenario content in `scenarios.json`
+- Finish French and Spanish UI translations
+- Review Arabic translations for accuracy
+
 ## 🎮 How to Use
 
-1. **Start Your Journey**: Begin with the intro screen and start your first scenario
-2. **Experience Perspectives**: Navigate through different viewpoints in each scenario
-3. **Reflect and Learn**: Consider systemic factors and complete reflections
-4. **Track Growth**: Monitor your empathy development in the analytics section
-5. **Personal Impact**: Reflect on your journey and find meaningful ways to take action
+1. **Choose Your Language**: Click the globe icon to select your preferred language
+2. **Start Your Journey**: Begin with the intro screen and start your first scenario
+3. **Experience Perspectives**: Navigate through different viewpoints in each scenario
+4. **Reflect and Learn**: Consider systemic factors and complete reflections
+5. **Track Growth**: Monitor your empathy development in the analytics section
+6. **Personal Impact**: Reflect on your journey and find meaningful ways to take action
 
 ## 🔧 Available Scripts
 
@@ -419,6 +467,32 @@ The application is configured for static export and optimized for Netlify deploy
    - Publish directory: `out`
    - Node version: 18.x
 
+## 🚧 Areas That Need Work
+
+### High Priority
+- **🌍 Complete Arabic Scenario Translation**: Full scenario content translation to Arabic
+- **🇫🇷 French Translation**: Complete UI and scenario translations
+- **🇪🇸 Spanish Translation**: Complete UI and scenario translations
+- **🧪 Multi-language Testing**: Test language switching across all components
+
+### Medium Priority  
+- **🎯 Component Translation Integration**: Update remaining components to use translation hooks
+- **📱 Mobile RTL Optimization**: Improve mobile RTL layout for Arabic
+- **🔄 Language URL Routing**: Implement proper URL-based language routing
+- **🎨 RTL UI Polish**: Fine-tune RTL spacing and alignment
+
+### Low Priority
+- **🌐 Additional Languages**: Add more languages (Hebrew, Persian, etc.)
+- **🗣️ Language Detection**: Auto-detect user's preferred language
+- **📊 Translation Analytics**: Track language usage and preferences
+- **🎬 Multi-language Media**: Localized images and media content
+
+### Technical Debt
+- **⚡ Performance**: Optimize translation bundle loading
+- **🔧 Build Process**: Improve static export with i18n
+- **📦 Bundle Size**: Reduce translation file sizes
+- **🧹 Code Cleanup**: Refactor translation system for better maintainability
+
 ## 🤝 Contributing
 
 **We welcome contributions from everyone!** 🌍❤️
@@ -429,6 +503,7 @@ Whether you're an educator, humanitarian worker, developer, or simply someone wh
 - **📝 Add Content**: Share scenarios, perspectives, and resources
 - **🌐 Create Your Own Version**: Fork and customize for your community  
 - **🛠️ Code**: Improve features, fix bugs, enhance accessibility
+- **🌍 Translation**: Help complete multi-language support
 - **📚 Documentation**: Help others understand and use the project
 - **🔍 Testing**: Report issues and suggest improvements
 

@@ -18,4 +18,8 @@ module.exports = {
     },
   },
   plugins: [],
+  // Add RTL support
+  corePlugins: {
+    preflight: true,
+  },
 }

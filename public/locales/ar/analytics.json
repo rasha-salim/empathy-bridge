@@ -1,0 +1,43 @@
+{
+  "title": "لوحة التحليلات",
+  "subtitle": "تتبع رحلة التعاطف الخاصة بك",
+  "metrics": {
+    "totalScenarios": "إجمالي السيناريوهات",
+    "completedScenarios": "السيناريوهات المكتملة",
+    "empathyGrowth": "نمو التعاطف",
+    "timeSpent": "الوقت المستغرق",
+    "reflectionScore": "نتيجة التأمل",
+    "perspectivesTaken": "المنظورات المأخوذة"
+  },
+  "charts": {
+    "empathyGrowthOverTime": "نمو التعاطف مع الوقت",
+    "scenarioCompletion": "إكمال السيناريوهات",
+    "perspectiveDistribution": "توزيع المنظورات",
+    "reflectionQuality": "جودة التأمل"
+  },
+  "achievements": {
+    "title": "الإنجازات",
+    "firstScenario": "إكمال السيناريو الأول",
+    "empathyBuilder": "بناء التعاطف",
+    "perspectiveTaker": "أخذ المنظور",
+    "deepThinker": "المفكر العميق",
+    "compassionateListener": "المستمع الشفوق",
+    "understandingBridge": "جسر التفاهم"
+  },
+  "insights": {
+    "title": "الرؤى الشخصية",
+    "growthTrend": "نمو التعاطف الخاص بك يتجه {{direction}}",
+    "strongestArea": "أقوى منطقة لديك هي {{area}}",
+    "improvementArea": "فكر في التركيز على {{area}}",
+    "nextRecommendation": "السيناريو التالي الموصى به: {{scenario}}"
+  },
+  "export": {
+    "title": "تصدير البيانات",
+    "description": "تحميل بيانات رحلة التعاطف الخاصة بك",
+    "formats": {
+      "json": "تنسيق JSON",
+      "csv": "تنسيق CSV",
+      "pdf": "تقرير PDF"
+    }
+  }
+}

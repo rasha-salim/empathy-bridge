@@ -1,0 +1,55 @@
+{
+  "title": "Global Impact",
+  "subtitle": "See how empathy creates change",
+  "sections": {
+    "communityStats": "Community Statistics",
+    "realWorldImpact": "Real-World Impact",
+    "takeAction": "Take Action",
+    "latestNews": "Latest News",
+    "organizations": "Organizations"
+  },
+  "stats": {
+    "totalUsers": "Total Users",
+    "scenariosCompleted": "Scenarios Completed",
+    "perspectivesExplored": "Perspectives Explored",
+    "countriesReached": "Countries Reached",
+    "empathyGrowthAverage": "Average Empathy Growth",
+    "activeUsers": "Active Users"
+  },
+  "impact": {
+    "title": "Creating Real Change",
+    "description": "Through empathy-building, our community contributes to:",
+    "areas": {
+      "understanding": "Increased cross-cultural understanding",
+      "donations": "Humanitarian donations increased",
+      "advocacy": "Advocacy actions taken",
+      "education": "Educational initiatives supported",
+      "dialogue": "Interfaith dialogue facilitated",
+      "awareness": "Crisis awareness raised"
+    }
+  },
+  "actions": {
+    "title": "Ways to Help",
+    "description": "Turn your empathy into action:",
+    "donate": "Donate to humanitarian organizations",
+    "volunteer": "Volunteer with local organizations",
+    "advocate": "Advocate for policy changes",
+    "educate": "Educate others about the crisis",
+    "share": "Share stories and raise awareness",
+    "support": "Support affected communities"
+  },
+  "news": {
+    "title": "Latest Updates",
+    "readMore": "Read more",
+    "source": "Source",
+    "published": "Published",
+    "category": "Category"
+  },
+  "organizations": {
+    "title": "Partner Organizations",
+    "description": "Organizations working to help:",
+    "visitWebsite": "Visit Website",
+    "learnMore": "Learn More",
+    "donate": "Donate"
+  }
+}

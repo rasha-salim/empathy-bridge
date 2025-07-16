@@ -1,0 +1,51 @@
+{
+  "titles": {
+    "1": "The School Day That Never Came",
+    "2": "The Medical Emergency", 
+    "3": "The Displaced Family's Shelter",
+    "4": "The Journalist's Dilemma",
+    "5": "The Aid Worker's Arrival"
+  },
+  "complexity": {
+    "low": "Low",
+    "medium": "Medium", 
+    "high": "High"
+  },
+  "regions": {
+    "gaza": "Gaza"
+  },
+  "contexts": {
+    "1": "Educational disruption during conflict",
+    "2": "Healthcare access during crisis",
+    "3": "Housing crisis and displacement",
+    "4": "Media coverage and truth-telling under pressure",
+    "5": "International humanitarian response"
+  },
+  "situations": {
+    "1": "A 10-year-old child in Gaza wakes up expecting to go to school, but discovers their school has been damaged overnight.",
+    "2": "A hospital in Gaza receives an influx of patients during a medical emergency while facing severe resource shortages.",
+    "3": "A family of six has been staying in a temporary shelter for three weeks after their home was destroyed, sharing space with multiple other families.",
+    "4": "A local journalist must decide how to report on a tragic incident while balancing safety, truth, and the need to inform the world.",
+    "5": "A newly arrived international aid worker experiences their first day distributing food supplies in a Gaza neighborhood."
+  },
+  "labels": {
+    "role": "Role",
+    "background": "Background",
+    "thoughts": "Thoughts",
+    "feelings": "Feelings",
+    "needs": "Needs",
+    "physiological": "Physiological Response",
+    "longTermImpact": "Long-term Impact",
+    "systemicFactors": "Systemic Factors",
+    "empathyQuestions": "Empathy Questions",
+    "beforeReflection": "Before Reflection",
+    "betweenPerspectives": "Between Perspectives",
+    "perspectiveSpecific": "Perspective-Specific"
+  },
+  "instructions": {
+    "readCarefully": "Read each perspective carefully",
+    "reflectOnQuestions": "Reflect on the questions provided",
+    "considerConnections": "Consider how these perspectives connect",
+    "thinkAboutSolutions": "Think about potential solutions"
+  }
+}

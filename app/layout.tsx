@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/lib/theme'
+import { LanguageProvider } from '@/lib/language-context'
 
 export const metadata: Metadata = {
   title: 'Unboxing Empathy - Building Understanding Through Gaza Stories',
@@ -27,13 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>
-          <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-            <main className="flex-1">
-              {children}
-            </main>
-          </div>
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+              <main className="flex-1">
+                {children}
+              </main>
+            </div>
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

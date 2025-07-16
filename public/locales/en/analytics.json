@@ -1,0 +1,43 @@
+{
+  "title": "Analytics Dashboard",
+  "subtitle": "Track your empathy journey",
+  "metrics": {
+    "totalScenarios": "Total Scenarios",
+    "completedScenarios": "Completed Scenarios",
+    "empathyGrowth": "Empathy Growth",
+    "timeSpent": "Time Spent",
+    "reflectionScore": "Reflection Score",
+    "perspectivesTaken": "Perspectives Taken"
+  },
+  "charts": {
+    "empathyGrowthOverTime": "Empathy Growth Over Time",
+    "scenarioCompletion": "Scenario Completion",
+    "perspectiveDistribution": "Perspective Distribution",
+    "reflectionQuality": "Reflection Quality"
+  },
+  "achievements": {
+    "title": "Achievements",
+    "firstScenario": "First Scenario Complete",
+    "empathyBuilder": "Empathy Builder",
+    "perspectiveTaker": "Perspective Taker",
+    "deepThinker": "Deep Thinker",
+    "compassionateListener": "Compassionate Listener",
+    "understandingBridge": "Understanding Bridge"
+  },
+  "insights": {
+    "title": "Personal Insights",
+    "growthTrend": "Your empathy growth is trending {{direction}}",
+    "strongestArea": "Your strongest area is {{area}}",
+    "improvementArea": "Consider focusing on {{area}}",
+    "nextRecommendation": "Recommended next scenario: {{scenario}}"
+  },
+  "export": {
+    "title": "Export Data",
+    "description": "Download your empathy journey data",
+    "formats": {
+      "json": "JSON Format",
+      "csv": "CSV Format",
+      "pdf": "PDF Report"
+    }
+  }
+}

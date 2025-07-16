@@ -1,0 +1,65 @@
+{
+  "appName": "كشف التعاطف",
+  "navigation": {
+    "game": "اللعبة",
+    "analytics": "التحليلات",
+    "impact": "التأثير",
+    "darkMode": "تبديل الوضع المظلم"
+  },
+  "buttons": {
+    "continue": "متابعة",
+    "next": "التالي",
+    "previous": "السابق",
+    "back": "رجوع",
+    "start": "بدء",
+    "finish": "إنهاء",
+    "restart": "إعادة البدء",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "submit": "إرسال",
+    "reset": "إعادة تعيين"
+  },
+  "form": {
+    "name": "الاسم",
+    "age": "العمر",
+    "email": "البريد الإلكتروني",
+    "required": "مطلوب",
+    "optional": "اختياري",
+    "placeholder": {
+      "name": "أدخل اسمك",
+      "age": "أدخل عمرك",
+      "email": "أدخل بريدك الإلكتروني"
+    }
+  },
+  "messages": {
+    "welcome": "مرحبا بك في كشف التعاطف",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "success": "نجح!",
+    "noData": "لا توجد بيانات متاحة",
+    "comingSoon": "قريباً"
+  },
+  "time": {
+    "minutes": "دقائق",
+    "hours": "ساعات",
+    "days": "أيام",
+    "weeks": "أسابيع",
+    "months": "شهور"
+  },
+  "empathy": {
+    "perspective": "منظور",
+    "scenarios": "سيناريوهات",
+    "growth": "نمو",
+    "reflection": "تأمل",
+    "understanding": "فهم",
+    "compassion": "شفقة"
+  },
+  "language": {
+    "english": "English",
+    "arabic": "العربية",
+    "french": "Français",
+    "spanish": "Español",
+    "selectLanguage": "اختر اللغة"
+  }
+}
