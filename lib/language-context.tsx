@@ -71,7 +71,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
     // Simple parameter replacement
     if (params) {
-      return value.replace(/{{(\w+)}}/g, (match, param) => params[param] || match)
+      return (value as string).replace(/{{(\w+)}}/g, (match, param) => params[param] || match)
     }
 
     return value
