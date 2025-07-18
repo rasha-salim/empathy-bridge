@@ -13,7 +13,7 @@ const nextConfig = {
   assetPrefix: process.env.GITHUB_ACTIONS ? '/empathy-bridge/' : '',
   
   // i18n configuration - only enable when not using static export
-  ...(process.env.NODE_ENV !== 'production' && {
+  ...(!process.env.GITHUB_ACTIONS && process.env.NODE_ENV !== 'production' && {
     i18n: {
       locales: ['en', 'ar', 'fr', 'es'],
       defaultLocale: 'en',
