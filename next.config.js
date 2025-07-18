@@ -12,12 +12,14 @@ const nextConfig = {
   basePath: process.env.GITHUB_ACTIONS ? '/empathy-bridge' : '',
   assetPrefix: process.env.GITHUB_ACTIONS ? '/empathy-bridge/' : '',
   
-  // i18n configuration
-  i18n: {
-    locales: ['en', 'ar', 'fr', 'es'],
-    defaultLocale: 'en',
-    localeDetection: true,
-  },
+  // i18n configuration - only enable when not using static export
+  ...(process.env.NODE_ENV !== 'production' && {
+    i18n: {
+      locales: ['en', 'ar', 'fr', 'es'],
+      defaultLocale: 'en',
+      localeDetection: true,
+    },
+  }),
 }
 
 module.exports = nextConfig
