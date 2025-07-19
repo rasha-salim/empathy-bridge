@@ -538,8 +538,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🔗 Links
 
-- [Live Demo](https://rasha-salim.github.io/empathy-bridge/global/)
-- [GitHub Repository](https://github.com/rasha-salim/empathy-bridge)
+- [Live Demo](https://rasha-salim.github.io/unboxing-empathy/)
+- [GitHub Repository](https://github.com/rasha-salim/unboxing-empathy)
 
 ## 💡 Support
 

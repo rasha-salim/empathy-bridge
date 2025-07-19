@@ -9,8 +9,8 @@ const nextConfig = {
   // Configure for GitHub Pages deployment
   // Set basePath only when deploying to GitHub Pages (when GITHUB_ACTIONS is true)
   // This allows the app to work both locally and on GitHub Pages
-  basePath: process.env.GITHUB_ACTIONS ? '/empathy-bridge' : '',
-  assetPrefix: process.env.GITHUB_ACTIONS ? '/empathy-bridge/' : '',
+  basePath: process.env.GITHUB_ACTIONS ? '/unboxing-empathy' : '',
+  assetPrefix: process.env.GITHUB_ACTIONS ? '/unboxing-empathy/' : '',
   
   // i18n configuration - only enable when not using static export
   ...(!process.env.GITHUB_ACTIONS && process.env.NODE_ENV !== 'production' && {
